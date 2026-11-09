@@ -85,7 +85,7 @@ function DashboardView({ data }: { data: DashboardData }) {
         </p>
       ) : null}
 
-      <header className="home-rise relative min-h-64 overflow-hidden rounded-[2rem] border border-border/80 bg-[#f7f4ec] shadow-[0_18px_50px_rgba(23,56,42,0.06)] sm:min-h-80">
+      <header className="home-rise relative min-h-64 w-full max-w-full overflow-hidden rounded-[2rem] border border-border/80 bg-[#f7f4ec] shadow-[0_18px_50px_rgba(23,56,42,0.06)] sm:min-h-80">
         <HomeScene />
         <div
           className="home-sun pointer-events-none absolute right-5 top-5 size-14 sm:right-8 sm:top-7 sm:size-16"
@@ -139,7 +139,7 @@ function DashboardView({ data }: { data: DashboardData }) {
         {data.continueLesson ? (
           <Link
             href={`/lesson/${data.continueLesson.id}`}
-            className="group flex items-center gap-4 rounded-3xl border border-border bg-card px-4 py-4 shadow-[0_10px_30px_rgba(23,56,42,0.05)] transition duration-300 hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_16px_40px_rgba(23,56,42,0.08)]"
+            className="group flex min-w-0 items-center gap-4 rounded-3xl border border-border bg-card px-4 py-4 shadow-[0_10px_30px_rgba(23,56,42,0.05)] transition duration-300 hover:-translate-y-0.5 hover:border-primary hover:shadow-[0_16px_40px_rgba(23,56,42,0.08)]"
           >
             <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-secondary text-foreground">
               <BookOpen className="size-5" aria-hidden />
@@ -192,12 +192,12 @@ function DashboardView({ data }: { data: DashboardData }) {
                   {module.href ? (
                     <Link
                       href={module.href}
-                      className="flex items-center gap-4 rounded-3xl border border-border bg-card px-4 py-4 transition-colors hover:border-primary"
+                      className="flex min-w-0 items-center gap-4 rounded-3xl border border-border bg-card px-4 py-4 transition-colors hover:border-primary"
                     >
                       {body}
                     </Link>
                   ) : (
-                    <div className="flex items-center gap-4 rounded-3xl border border-border bg-card px-4 py-4 opacity-70">
+                    <div className="flex min-w-0 items-center gap-4 rounded-3xl border border-border bg-card px-4 py-4 opacity-70">
                       {body}
                     </div>
                   )}

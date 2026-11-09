@@ -83,11 +83,16 @@ function NavLinks({
             className={cn(
               "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
               active && "bg-secondary text-foreground",
-              compact && "min-w-0 flex-1 flex-col gap-1 px-1 py-2 text-[11px]",
+              compact &&
+                "min-w-0 flex-col items-center gap-1 px-0.5 py-2 text-center text-[clamp(9px,2.5vw,11px)] leading-none",
             )}
           >
-            <Icon className="size-5" aria-hidden />
-            {item.label}
+            <Icon className="size-5 shrink-0" aria-hidden />
+            {compact ? (
+              <span className="w-full truncate text-center">{item.label}</span>
+            ) : (
+              item.label
+            )}
           </Link>
         );
       })}
@@ -98,11 +103,12 @@ function NavLinks({
           className={cn(
             "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
             pathname.startsWith("/admin") && "bg-secondary text-foreground",
-            compact && "min-w-0 flex-1 flex-col gap-1 px-1 py-2 text-[11px]",
+            compact &&
+              "min-w-0 flex-col items-center gap-1 px-0.5 py-2 text-center text-[clamp(9px,2.5vw,11px)] leading-none",
           )}
         >
-          <Shield className="size-5" aria-hidden />
-          Админ
+          <Shield className="size-5 shrink-0" aria-hidden />
+          {compact ? <span className="w-full truncate text-center">Админ</span> : "Админ"}
         </Link>
       ) : null}
     </>
@@ -127,10 +133,10 @@ export function AppChrome() {
         {streak} {pluralDays(streak)}
       </span>
       <nav
-        className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-20 w-full max-w-full overflow-hidden border-t border-border bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
         aria-label="Разделы"
       >
-        <div className="mx-auto flex w-full max-w-lg items-stretch justify-between">
+        <div className="grid w-full auto-cols-fr grid-flow-col">
           <NavLinks pathname={pathname} role={role} compact />
         </div>
       </nav>
@@ -140,8 +146,8 @@ export function AppChrome() {
 
 export function AppFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-dvh overflow-x-hidden bg-background">
-      <div className="flex min-h-dvh min-w-0 flex-col overflow-x-hidden pb-24 md:pb-0 md:pl-[260px]">
+    <div className="fixed inset-0 overflow-x-hidden overflow-y-auto overscroll-y-contain bg-background">
+      <div className="flex min-h-full w-full min-w-0 max-w-full flex-col pb-24 md:pb-0 md:pl-[260px]">
         <header className="flex min-w-0 items-center py-4 pl-4 pr-28 md:justify-end md:px-8">
           <div className="min-w-0 md:hidden">
             <Logo href="/dashboard" />

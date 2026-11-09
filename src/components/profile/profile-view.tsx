@@ -16,7 +16,7 @@ export function ProfileScreen() {
   const initial = session.user.fullName.trim().charAt(0).toUpperCase() || "Т";
 
   return (
-    <section className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+    <section className="mx-auto flex w-full min-w-0 max-w-3xl flex-col gap-6">
       <h1 className="text-2xl font-semibold tracking-tight">Профиль</h1>
       <Card className="flex flex-col gap-5 p-6">
         <div className="flex items-center gap-4">

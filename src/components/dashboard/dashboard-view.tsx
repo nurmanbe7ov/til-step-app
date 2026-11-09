@@ -76,7 +76,7 @@ function DashboardView({ data }: { data: DashboardData }) {
   const progress = useDrawnProgress(data.progressPercent);
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
+    <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col gap-8">
       {data.usingMock ? (
         <p className="rounded-2xl border border-accent/70 bg-accent/35 px-4 py-3 text-sm leading-6">
           Это демонстрационный кабинет. Добавьте ключи Supabase в{" "}
@@ -98,7 +98,7 @@ function DashboardView({ data }: { data: DashboardData }) {
           <p className="text-xs font-semibold tracking-[0.16em] text-primary">
             САЛАМАТСЫЗБЫ!
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight break-words sm:text-4xl">
             Привет, {name}!
           </h1>
           <p className="mt-3 text-muted-foreground">

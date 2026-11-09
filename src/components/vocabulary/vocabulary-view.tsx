@@ -14,7 +14,7 @@ export function VocabularyScreen() {
 
 function VocabularyView({ data }: { data: VocabularyData }) {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+    <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col gap-6">
       {data.usingMock ? (
         <p className="rounded-2xl border border-accent/70 bg-accent/35 px-4 py-3 text-sm leading-6">
           Это демонстрационный словарь. Добавьте ключи Supabase в{" "}

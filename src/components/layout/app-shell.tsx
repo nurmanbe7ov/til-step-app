@@ -83,7 +83,7 @@ function NavLinks({
             className={cn(
               "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
               active && "bg-secondary text-foreground",
-              compact && "flex-col gap-1 px-1 py-2 text-[11px]",
+              compact && "min-w-0 flex-1 flex-col gap-1 px-1 py-2 text-[11px]",
             )}
           >
             <Icon className="size-5" aria-hidden />
@@ -98,7 +98,7 @@ function NavLinks({
           className={cn(
             "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
             pathname.startsWith("/admin") && "bg-secondary text-foreground",
-            compact && "flex-col gap-1 px-1 py-2 text-[11px]",
+            compact && "min-w-0 flex-1 flex-col gap-1 px-1 py-2 text-[11px]",
           )}
         >
           <Shield className="size-5" aria-hidden />
@@ -130,7 +130,7 @@ export function AppChrome() {
         className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
         aria-label="Разделы"
       >
-        <div className="mx-auto flex max-w-lg items-stretch justify-between">
+        <div className="mx-auto flex w-full max-w-lg items-stretch justify-between">
           <NavLinks pathname={pathname} role={role} compact />
         </div>
       </nav>
@@ -140,14 +140,14 @@ export function AppChrome() {
 
 export function AppFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-dvh bg-background">
-      <div className="flex min-h-dvh flex-col pb-24 md:pb-0 md:pl-[260px]">
-        <header className="flex items-center py-4 pl-4 pr-28 md:justify-end md:px-8">
-          <div className="md:hidden">
+    <div className="min-h-dvh overflow-x-hidden bg-background">
+      <div className="flex min-h-dvh min-w-0 flex-col overflow-x-hidden pb-24 md:pb-0 md:pl-[260px]">
+        <header className="flex min-w-0 items-center py-4 pl-4 pr-28 md:justify-end md:px-8">
+          <div className="min-w-0 md:hidden">
             <Logo href="/dashboard" />
           </div>
         </header>
-        <main className="flex-1 px-4 pb-8 md:px-8">{children}</main>
+        <main className="min-w-0 flex-1 overflow-x-hidden px-4 pb-8 md:px-8">{children}</main>
       </div>
     </div>
   );

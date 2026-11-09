@@ -142,9 +142,12 @@ export function HomeScene() {
     <svg
       ref={svgRef}
       aria-hidden
+      width="100%"
+      height="100%"
       viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
       preserveAspectRatio="xMinYMid slice"
-      className="absolute inset-0 h-full w-full"
+      overflow="hidden"
+      className="absolute inset-0 block h-full max-w-full"
     >
       <defs>
         <linearGradient id="tilstep-home-sky" x1="0" y1="0" x2="1" y2="1">

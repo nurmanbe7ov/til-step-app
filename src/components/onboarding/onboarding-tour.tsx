@@ -67,12 +67,12 @@ export function OnboardingTour() {
   }
 
   return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center bg-[#17382A]/45 p-4 sm:items-center">
+    <div className="fixed inset-0 z-40 flex items-center justify-center overflow-hidden bg-[#17382A]/45 p-4">
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="onboarding-title"
-        className="w-full max-w-md rounded-3xl bg-card px-5 py-5 shadow-[0_20px_60px_rgba(23,56,42,0.18)] sm:px-6 sm:py-6"
+        className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-3xl bg-card px-5 py-5 shadow-[0_20px_60px_rgba(23,56,42,0.18)] sm:px-6 sm:py-6"
       >
         <div className="flex items-center justify-between gap-3">
           <div className="flex gap-1.5" aria-hidden>

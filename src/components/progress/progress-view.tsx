@@ -80,7 +80,7 @@ function ProgressView({ data }: { data: DashboardData }) {
   const groups = courseGroups(data);
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
+    <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col gap-8">
       {data.usingMock ? (
         <p className="rounded-2xl border border-accent/70 bg-accent/35 px-4 py-3 text-sm leading-6">
           Это демонстрационный прогресс. Добавьте ключи Supabase в{" "}

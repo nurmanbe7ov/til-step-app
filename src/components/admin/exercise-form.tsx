@@ -73,7 +73,7 @@ export function BulkExerciseForm({ lessonId }: { lessonId: string }) {
         </p>
       ) : null}
       {savedCount !== null ? (
-        <p className="text-sm leading-6 text-[#1d6a34]" role="status">
+        <p className="text-sm leading-6 text-[var(--good)]" role="status">
           Добавлено заданий: {savedCount}.
         </p>
       ) : null}
@@ -217,7 +217,7 @@ export function ExerciseForm({ lessonId }: { lessonId: string }) {
         </p>
       ) : null}
       {saved ? (
-        <p className="text-sm leading-6 text-[#1d6a34]" role="status">
+        <p className="text-sm leading-6 text-[var(--good)]" role="status">
           Задание добавлено в конец урока.
         </p>
       ) : null}

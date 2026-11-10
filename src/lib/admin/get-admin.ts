@@ -38,6 +38,20 @@ export type AdminCatalog =
   | { status: "mock" }
   | { status: "ready"; courses: AdminCourse[] };
 
+export type AdminEmployee = {
+  id: string;
+  fullName: string;
+  email: string;
+  role: "student" | "admin";
+  progressPercent: number;
+  completedLessons: number;
+  totalLessons: number;
+};
+
+export type AdminEmployees =
+  | { status: "mock" }
+  | { status: "ready"; employees: AdminEmployee[] };
+
 const typeLabels: Record<string, string> = {
   flashcard: "Карточка",
   multiple_choice: "Выбор перевода",
@@ -171,6 +185,101 @@ export async function getAdminCatalog(): Promise<AdminCatalog> {
   }
 
   return { status: "ready", courses };
+}
+
+export async function getAdminEmployees(): Promise<AdminEmployees> {
+  const session = await requireSession();
+
+  if (session.mode === "mock") {
+    return { status: "mock" };
+  }
+
+  if (session.user.role !== "admin") {
+    redirect("/dashboard");
+  }
+
+  const supabase = await createClient();
+  const [profilesResult, progressResult, lessonsResult] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("id, full_name, email, role, created_at")
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("user_progress")
+      .select("user_id, lesson_id, status")
+      .eq("status", "completed"),
+    supabase.from("lessons").select("id").eq("is_published", true),
+  ]);
+
+  if (profilesResult.error || progressResult.error || lessonsResult.error) {
+    throw new Error("Не удалось загрузить сотрудников");
+  }
+
+  const publishedLessonIds = new Set<string>();
+
+  for (const row of Array.isArray(lessonsResult.data) ? lessonsResult.data : []) {
+    if (!isRecord(row)) {
+      continue;
+    }
+
+    const id = readString(row.id);
+
+    if (id) {
+      publishedLessonIds.add(id);
+    }
+  }
+
+  const completedByUser = new Map<string, number>();
+
+  for (const row of Array.isArray(progressResult.data) ? progressResult.data : []) {
+    if (!isRecord(row)) {
+      continue;
+    }
+
+    const userId = readString(row.user_id);
+    const lessonId = readString(row.lesson_id);
+
+    if (!userId || !lessonId || !publishedLessonIds.has(lessonId)) {
+      continue;
+    }
+
+    completedByUser.set(userId, (completedByUser.get(userId) ?? 0) + 1);
+  }
+
+  const totalLessons = publishedLessonIds.size;
+  const employees: AdminEmployee[] = [];
+
+  for (const row of Array.isArray(profilesResult.data) ? profilesResult.data : []) {
+    if (!isRecord(row)) {
+      continue;
+    }
+
+    const id = readString(row.id);
+    const email = readString(row.email);
+
+    if (!id || !email) {
+      continue;
+    }
+
+    const fullName =
+      readString(row.full_name)?.trim() || email.split("@")[0] || "Сотрудник";
+    const completedLessons = Math.min(completedByUser.get(id) ?? 0, totalLessons);
+
+    employees.push({
+      id,
+      fullName,
+      email,
+      role: row.role === "admin" ? "admin" : "student",
+      completedLessons,
+      totalLessons,
+      progressPercent:
+        totalLessons === 0
+          ? 0
+          : Math.round((completedLessons / totalLessons) * 100),
+    });
+  }
+
+  return { status: "ready", employees };
 }
 
 export async function getAdminLesson(

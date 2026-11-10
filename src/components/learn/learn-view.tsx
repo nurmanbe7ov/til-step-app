@@ -21,7 +21,7 @@ const statusTone: Record<ModuleStatus, "done" | "current" | "locked"> = {
 function LessonIcon({ status }: { status: ModuleStatus }) {
   if (status === "completed") {
     return (
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-[#1d6a34]">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-[var(--good)]">
         <Check className="size-5" aria-hidden />
       </span>
     );

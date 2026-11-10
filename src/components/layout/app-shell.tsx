@@ -6,7 +6,9 @@ import {
   Flame,
   House,
   Library,
+  Moon,
   Shield,
+  Sun,
   UserRound,
   type LucideIcon,
 } from "lucide-react";
@@ -115,6 +117,32 @@ function NavLinks({
   );
 }
 
+function toggleTheme() {
+  const root = document.documentElement;
+  const next = !root.classList.contains("dark");
+  root.classList.toggle("dark", next);
+
+  try {
+    localStorage.setItem("tilstep-theme", next ? "dark" : "light");
+  } catch {
+    return;
+  }
+}
+
+function ThemeToggle() {
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label="Сменить тему"
+      className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground"
+    >
+      <Sun className="hidden size-4 dark:block" aria-hidden />
+      <Moon className="size-4 dark:hidden" aria-hidden />
+    </button>
+  );
+}
+
 export function AppChrome() {
   const pathname = usePathname();
   const { session } = useAppData();
@@ -128,10 +156,13 @@ export function AppChrome() {
           <NavLinks pathname={pathname} role={role} />
         </nav>
       </aside>
-      <span className="fixed right-4 top-4 z-20 inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground md:right-8">
-        <Flame className="size-4" aria-hidden />
-        {streak} {pluralDays(streak)}
-      </span>
+      <div className="fixed right-4 top-4 z-20 flex items-center gap-2 md:right-8">
+        <ThemeToggle />
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground">
+          <Flame className="size-4" aria-hidden />
+          {streak} {pluralDays(streak)}
+        </span>
+      </div>
       <nav
         className="fixed inset-x-0 bottom-0 z-20 w-full max-w-full overflow-hidden border-t border-border bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
         aria-label="Разделы"
@@ -148,7 +179,7 @@ export function AppFrame({ children }: { children: ReactNode }) {
   return (
     <div className="fixed inset-0 overflow-x-hidden overflow-y-auto overscroll-y-contain bg-background">
       <div className="flex min-h-full w-full min-w-0 max-w-full flex-col pb-24 md:pb-0 md:pl-[260px]">
-        <header className="flex min-w-0 items-center py-4 pl-4 pr-28 md:justify-end md:px-8">
+        <header className="flex min-w-0 items-center py-4 pl-4 pr-40 md:justify-end md:px-8">
           <div className="min-w-0 md:hidden">
             <Logo href="/dashboard" />
           </div>

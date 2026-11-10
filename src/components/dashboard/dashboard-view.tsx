@@ -24,7 +24,7 @@ const statusTone: Record<ModuleStatus, "done" | "current" | "locked"> = {
 function ModuleIcon({ status }: { status: ModuleStatus }) {
   if (status === "completed") {
     return (
-      <span className="flex size-11 items-center justify-center rounded-full bg-primary/15 text-[#1d6a34]">
+      <span className="flex size-11 items-center justify-center rounded-full bg-primary/15 text-[var(--good)]">
         <Check className="size-5" aria-hidden />
       </span>
     );
@@ -85,16 +85,9 @@ function DashboardView({ data }: { data: DashboardData }) {
         </p>
       ) : null}
 
-      <header className="home-rise relative min-h-64 w-full max-w-full overflow-hidden rounded-[2rem] border border-border/80 bg-[#f7f4ec] shadow-[0_18px_50px_rgba(23,56,42,0.06)] sm:min-h-80">
+      <header className="home-hero home-rise relative min-h-64 w-full max-w-full overflow-hidden rounded-[2rem] border border-border/80 shadow-[0_18px_50px_rgba(23,56,42,0.06)] sm:min-h-80">
         <HomeScene />
-        <div
-          className="home-sun pointer-events-none absolute right-5 top-5 size-14 sm:right-8 sm:top-7 sm:size-16"
-          aria-hidden
-        >
-          <span className="absolute inset-0 rounded-full bg-[#f4c95d]/40 blur-md" />
-          <span className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f4c95d] sm:size-8" />
-        </div>
-        <div className="relative max-w-sm px-6 py-8 sm:px-8 sm:py-10">
+        <div className="relative max-w-sm px-6 pb-8 pt-20 sm:px-8 sm:pb-10 sm:pt-24">
           <p className="text-xs font-semibold tracking-[0.16em] text-primary">
             САЛАМАТСЫЗБЫ!
           </p>

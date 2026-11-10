@@ -6,11 +6,11 @@ export function Logo({ href }: { href?: string }) {
       <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-primary text-lg font-semibold text-primary-foreground">
         T
       </span>
-      <span>
-        <span className="block text-base font-semibold leading-none tracking-tight">
+      <span className="min-w-0">
+        <span className="block truncate text-base font-semibold leading-none tracking-tight">
           TilStep
         </span>
-        <span className="mt-1 block text-xs text-muted-foreground">
+        <span className="mt-1 block truncate text-xs text-muted-foreground">
           Кыргызча күн сайын
         </span>
       </span>
@@ -22,7 +22,7 @@ export function Logo({ href }: { href?: string }) {
   }
 
   return (
-    <Link href={href} className="flex items-center gap-3" aria-label="TilStep, на главную">
+    <Link href={href} className="flex min-w-0 items-center gap-3" aria-label="TilStep, на главную">
       {content}
     </Link>
   );

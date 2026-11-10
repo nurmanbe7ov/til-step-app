@@ -29,7 +29,7 @@ export default function AdminPage() {
         >
           <span className="block text-lg font-semibold">Сотрудники</span>
           <span className="mt-2 block text-sm leading-6 text-muted-foreground">
-            Список сотрудников появится следующим шагом.
+            Имя, почта и прогресс каждого сотрудника.
           </span>
         </Link>
       </div>

@@ -119,7 +119,7 @@ function PraiseBurst({ count }: { count: number }) {
           />
           <PraiseLine
             text={copy.caption}
-            className="mt-2 whitespace-nowrap text-[clamp(1.05rem,3.2vw,1.65rem)] text-[#C4962C]"
+            className="mt-2 whitespace-nowrap text-[clamp(1.05rem,3.2vw,1.65rem)] text-[#C4962C] dark:text-[#e6c56a]"
           />
         </div>
         <img
@@ -629,7 +629,7 @@ function FeedbackBanner({ outcome }: { outcome: AnswerOutcome }) {
     >
       <p className="flex items-center gap-2 font-semibold">
         {outcome.isCorrect ? (
-          <Check className="size-4 text-[#1d6a34]" aria-hidden />
+          <Check className="size-4 text-[var(--good)]" aria-hidden />
         ) : (
           <X className="size-4 text-destructive" aria-hidden />
         )}
@@ -784,7 +784,7 @@ function PairTile({
       className={cn(
         "min-h-16 rounded-2xl border border-border bg-card px-3 py-3 text-center text-base font-medium transition duration-150 active:scale-[0.98] disabled:active:scale-100",
         selected && !wrong && "border-primary bg-secondary",
-        matched && "border-primary bg-secondary text-[#1d6a34]",
+        matched && "border-primary bg-secondary text-[var(--good)]",
         wrong && "border-destructive bg-destructive/10",
       )}
     >
@@ -945,7 +945,7 @@ function ResultScreen({
 }) {
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-6">
-      <section className="home-rise overflow-hidden rounded-[2rem] border border-border/80 bg-[#f7f4ec] px-5 py-8 text-center shadow-[0_18px_50px_rgba(23,56,42,0.06)] sm:px-8">
+      <section className="home-hero home-rise overflow-hidden rounded-[2rem] border border-border/80 px-5 py-8 text-center shadow-[0_18px_50px_rgba(23,56,42,0.06)] sm:px-8">
         <svg
           aria-hidden
           viewBox="0 0 360 78"
@@ -956,7 +956,7 @@ function ResultScreen({
             className="lesson-finish-path"
             d="M24 52C90 50 140 30 180 36C230 44 280 24 336 30"
             fill="none"
-            stroke="#1f4d36"
+            stroke="var(--home-ink)"
             strokeWidth="2"
             strokeLinecap="round"
             pathLength={1}

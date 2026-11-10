@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  color-scheme: light;
   --background: #f5f7f2;
   --foreground: #17382a;
   --card: #ffffff;
@@ -16,6 +19,47 @@
   --destructive: #c6453b;
   --border: #e1e6dc;
   --ring: #65b957;
+  --good: #1d6a34;
+  --track: #d7e4d2;
+  --home-hero: #f7f4ec;
+  --home-sky-0: #fbf6e8;
+  --home-sky-1: #f3f7ee;
+  --home-sky-2: #e4f0df;
+  --home-ridge: #d5e8cf;
+  --home-hill: #a9d09a;
+  --home-front: #1f4d36;
+  --home-trail: #f4f7f1;
+  --home-ink: #1f4d36;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #101814;
+  --foreground: #e6f0ea;
+  --card: #1a2820;
+  --card-foreground: #e6f0ea;
+  --primary: #78c769;
+  --primary-foreground: #102014;
+  --secondary: #24382e;
+  --secondary-foreground: #e6f0ea;
+  --muted: #24302a;
+  --muted-foreground: #a9b9af;
+  --accent: #e3b84a;
+  --accent-foreground: #241b08;
+  --destructive: #e07a70;
+  --border: #31483c;
+  --ring: #78c769;
+  --good: #9ed68f;
+  --track: #2c4036;
+  --home-hero: #102018;
+  --home-sky-0: #1a3352;
+  --home-sky-1: #163246;
+  --home-sky-2: #12281f;
+  --home-ridge: #1e3c32;
+  --home-hill: #1a5a3e;
+  --home-front: #0c2419;
+  --home-trail: #d5e8cf;
+  --home-ink: #d7e8cf;
 }
 
 @theme inline {
@@ -55,18 +99,105 @@ body {
   background: #d7efcf;
 }
 
+.dark ::selection {
+  background: #2d5a40;
+  color: #f5f7f2;
+}
+
+.home-hero {
+  background: var(--home-hero);
+}
+
+.home-sky-0,
+.home-sky-1,
+.home-sky-2,
+.home-ridge,
+.home-hill,
+.home-front {
+  transition: fill 1.15s ease, stop-color 1.15s ease;
+}
+
+.home-sky-0 {
+  stop-color: var(--home-sky-0);
+}
+
+.home-sky-1 {
+  stop-color: var(--home-sky-1);
+}
+
+.home-sky-2 {
+  stop-color: var(--home-sky-2);
+}
+
+.home-ridge {
+  fill: var(--home-ridge);
+}
+
+.home-hill {
+  fill: var(--home-hill);
+}
+
+.home-front {
+  fill: var(--home-front);
+}
+
+.home-moon {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  transform: translate(8%, 100%);
+  opacity: 0;
+  transition:
+    transform 1.45s cubic-bezier(0.4, 0, 0.55, 1),
+    opacity 0.25s ease 0.95s;
+}
+
+.dark .home-moon {
+  transform: translate(18%, 15%);
+  opacity: 1;
+  transition:
+    transform 1.8s cubic-bezier(0.33, 0.15, 0.2, 1),
+    opacity 0.15s linear;
+}
+
+.home-stars {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  transform: translate(0, 72%);
+  opacity: 0;
+  transition:
+    transform 1.5s cubic-bezier(0.4, 0, 0.55, 1),
+    opacity 0.25s ease 0.9s;
+}
+
+.dark .home-stars {
+  transform: none;
+  opacity: 1;
+  transition:
+    transform 1.7s cubic-bezier(0.33, 0.15, 0.2, 1),
+    opacity 0.2s linear 0.15s;
+}
+
+.home-sun {
+  transition:
+    transform 1.35s cubic-bezier(0.45, 0, 0.2, 1),
+    opacity 0.9s ease;
+}
+
+.dark .home-sun {
+  transform: translate(180%, 120%);
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .home-rise {
     animation: home-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .home-sun {
-    transform-box: fill-box;
-    transform-origin: center;
+  html:not(.dark) .home-sun-glow {
     animation: home-sun 9s ease-in-out infinite;
   }
 
-  .home-ridge {
+  .home-ridge-drift {
     animation: home-drift 18s ease-in-out infinite;
   }
 
@@ -146,6 +277,19 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .home-sun,
+  .home-moon,
+  .home-stars,
+  .home-sky-0,
+  .home-sky-1,
+  .home-sky-2,
+  .home-ridge,
+  .home-hill,
+  .home-front,
+  .home-hero {
+    transition: none;
+  }
+
   .home-walker {
     display: none;
   }

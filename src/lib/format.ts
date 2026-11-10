@@ -35,6 +35,10 @@ export function pluralTasks(count: number): string {
   return russianPlural(count, "задание", "задания", "заданий");
 }
 
+export function pluralLessons(count: number): string {
+  return russianPlural(count, "урок", "урока", "уроков");
+}
+
 export function pluralWords(count: number): string {
   return russianPlural(count, "слово", "слова", "слов");
 }

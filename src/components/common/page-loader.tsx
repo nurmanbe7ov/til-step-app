@@ -24,7 +24,7 @@ export function PageLoader({
           <path
             d={trail}
             fill="none"
-            stroke="#d7e4d2"
+            stroke="var(--track)"
             strokeWidth="3"
             strokeLinecap="round"
           />

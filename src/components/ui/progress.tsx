@@ -12,7 +12,7 @@ export function Progress({ value, label = "Прогресс", glow = false }: Pr
 
   return (
     <div
-      className="h-2.5 w-full rounded-full bg-[#d7e4d2]"
+      className="h-2.5 w-full rounded-full bg-[var(--track)]"
       role="progressbar"
       aria-label={label}
       aria-valuenow={clamped}
@@ -45,7 +45,7 @@ export function Badge({
     <span
       className={cn(
         "inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-semibold",
-        tone === "done" && "bg-primary/15 text-[#1d6a34]",
+        tone === "done" && "bg-primary/15 text-[var(--good)]",
         tone === "current" && "bg-foreground text-background",
         tone === "locked" && "bg-muted text-muted-foreground",
         className,
